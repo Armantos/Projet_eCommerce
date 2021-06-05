@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
 
         //$articles = [];
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $article = new Article();
             $article->setTitle($faker->text(50));
             $article->setContent($faker->text(6000));

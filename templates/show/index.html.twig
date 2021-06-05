@@ -12,7 +12,7 @@
         </div>
 
         <div class="content">
-            <p class="date"> Ecrit le {{ article.createdAt | date("d/m/y") }}
+            <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
                 à {{ article.createdAt | date("H:i") }}
             par <span class="author">{{ article.author }}</span></p>
             <h2 class="title">{{ article.title }}</h2>
