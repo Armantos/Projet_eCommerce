@@ -52,7 +52,7 @@ class AppFixtures extends Fixture
             $article->setImage($faker->imageUrl());
             $article->setCreatedAt(new \DateTime());
             $article->addCategory($categories[$faker->numberBetween(0,14)]);
-            $article->setAuthor($users[$faker->numberBetween(0,49)]);
+            $article->setSeller($users[$faker->numberBetween(0,49)]);
             $manager->persist($article);
         }
 

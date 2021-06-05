@@ -152,7 +152,7 @@ class User
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
-            $article->setAuthor($this);
+            $article->setSeller($this);
         }
 
         return $this;
@@ -162,8 +162,8 @@ class User
     {
         if ($this->articles->removeElement($article)) {
             // set the owning side to null (unless already changed)
-            if ($article->getAuthor() === $this) {
-                $article->setAuthor(null);
+            if ($article->getSeller() === $this) {
+                $article->setSeller(null);
             }
         }
 
