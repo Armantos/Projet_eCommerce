@@ -8,9 +8,19 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 class AppFixtures extends Fixture
 {
+
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
     public function load(ObjectManager $manager)
     {
         // $product = new Product();
@@ -26,7 +36,12 @@ class AppFixtures extends Fixture
             $user->setFirstName($faker->firstName());
             $user->setLastName($faker->lastName());
             $user->setEmail($faker->email);
-            $user->setPassword($faker->password());
+            // $user->setPassword($faker->password());
+            //Hash manuel du mdp ==> php bin/console security:hash-password
+            $user->setPassword($faker->passwordHasher->hashPassword(
+                $user,
+                'the_new_password'
+            ));
             $user->setCreatedAt(new \DateTime());
             $manager->persist($user);
             $users[] = $user;
@@ -51,8 +66,8 @@ class AppFixtures extends Fixture
             $article->setContent($faker->text(6000));
             $article->setImage($faker->imageUrl());
             $article->setCreatedAt(new \DateTime());
-            $article->addCategory($categories[$faker->numberBetween(0,14)]);
-            $article->setSeller($users[$faker->numberBetween(0,49)]);
+            $article->addCategory($categories[$faker->numberBetween(0, 14)]);
+            $article->setSeller($users[$faker->numberBetween(0, 49)]);
             $manager->persist($article);
         }
 
