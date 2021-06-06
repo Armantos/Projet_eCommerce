@@ -23,7 +23,7 @@ security:
             #anonymous: true
             lazy: true
             provider: users_in_memory
-            custom_authenticator: App\Security\LoginAuthentificatorAuthenticator
+            custom_authenticator: App\Security\LoginAuthentificator
             logout:
                 path: app_logout
                 # where to redirect after logout
