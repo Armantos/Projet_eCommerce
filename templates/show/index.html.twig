@@ -14,7 +14,7 @@
         <div class="content">
             <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
                 à {{ article.createdAt | date("H:i") }}
-            par <span class="author">{{ article.seller }}</span></p>
+            par <span class="seller">{{ article.seller }}</span></p>
             <h2 class="title">{{ article.title }}</h2>
             <p class="content text-justify">{{ article.content | raw }}</p> <!--raw permet de convertir le html-->
         </div>
