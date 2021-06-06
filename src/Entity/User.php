@@ -50,11 +50,6 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="author")
      */
     private $articles;
@@ -74,9 +69,10 @@ class User implements UserInterface
         return $this->username;
     }
 
-    public function __toString(){
-        return $this->firstName.' ' .$this->lastName;
-}
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 
     public function setUsername(string $username): self
     {
@@ -129,18 +125,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
