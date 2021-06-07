@@ -117,7 +117,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): ?string //?string = string ou null
     {
         return $this->password;
     }
@@ -162,8 +162,17 @@ class User implements UserInterface
     public function getRoles()
     {
         // TODO: Implement getRoles() method.
+        return ['ROLE_USER'];
     }
 
+
+    /*
+     * There are two things you need to store in the database:
+     * the encoded password and the random salt value that was used to encode the password.
+     * Most modern encoders - including the one we will use - store the salt value as part of the encoded password string.
+     * In other words, we only need this one field.
+     * And, the getSalt() method can stay blank
+     */
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
