@@ -37,7 +37,7 @@
             <div class="card col-md-4" style="width: 18rem;">
                 <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
                     à {{ article.createdAt | date("H:i") }}
-                par <span class="author">{{ article.author }}</span></p>
+                par <span class="seller">{{ article.seller }}</span></p>
                 <img class="card-img-top" src="/assets/eCommerce/images/{{ article.image }}" alt="{{ article.title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ article.title }}</h5>

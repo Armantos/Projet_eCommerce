@@ -28,7 +28,7 @@ class ArticleCrudController extends AbstractCrudController
             ImageField::new('image')->setUploadDir("public/assets/eCommerce/images")
                 ->setBasePath("assets/eCommerce/images")
                 ->setRequired(false), //empeche d'ajouter une deuxieme image
-            AssociationField::new('author'),
+            AssociationField::new('seller'),
             AssociationField::new('category'),
         ];
     }
