@@ -11,11 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HelloController
 {
 
-    /**
-     * @Route("/hello")
-     */
+
+    #[Route('/hello', name: 'hello')]
     public function hello() : Response
     {
-      return new Response("helloworld!");
+      return new Response("test : connexion reussie !");
     }
 }
