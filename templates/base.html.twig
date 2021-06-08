@@ -21,6 +21,8 @@
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
+
+
     <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -37,26 +39,29 @@
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
+
+                        {% if not app.user %}
+                        <!-- Si l'utilisateur n'est pas connecte, afficher le bouton login-->
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="login">Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
+                        {% endif %}
+
+                        {% if app.user %}
+                        <!--Si l'utilisateur est connecte, afficher le bouton panier et deconnexion-->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="{{ path('home')}}" class="nav-link">Panier</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('app_logout')}}" class="nav-link">Se déconnecter</a>
+                            </li>
+                        </ul>
+
+                        {% endif %}
                     </ul>
+
+                    <!--Barre de recherche à implementer ?-->
                     <form class="d-flex" data-children-count="1">
                         <input class="form-control me-sm-2" type="text" placeholder="Search">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -67,6 +72,7 @@
     </header>
 
     <div class="container">
+
         {% block body %}{% endblock %}
     </div>
 
