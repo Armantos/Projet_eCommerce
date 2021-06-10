@@ -15,6 +15,6 @@ class HelloController
     #[Route('/hello', name: 'hello')]
     public function hello() : Response
     {
-      return new Response("test : connexion reussie !");
+      return new Response("Hello World ! : la route fonctionne bien");
     }
 }
