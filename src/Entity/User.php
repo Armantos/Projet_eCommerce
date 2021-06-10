@@ -55,6 +55,11 @@ class User implements UserInterface, \Serializable
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -160,9 +165,13 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
-        return ['ROLE_ADMIN'];
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
 
@@ -212,5 +221,12 @@ class User implements UserInterface, \Serializable
             $this->password,
             $this->articles
             ) = unserialize($data, ['allow classes' => false]);
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }
