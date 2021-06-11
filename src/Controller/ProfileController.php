@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileController extends AbstractController
@@ -13,21 +14,49 @@ class ProfileController extends AbstractController
     #[Route('/profile', name: 'profile')]
     public function showProfile(): Response
     {
-
-        // usually you'll want to make sure the user is authenticated first
-      //  $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        // returns your User object, or null if the user is not authenticated
-        // use inline documentation to tell your editor your exact User class
-
-    //    $user = $this->getUser();
-
-        // Call whatever methods you've added to your User class
-        // For example, if you added a getFirstName() method, you can use that.
-     //   return new Response('Well hi there '.$user->getFirstName());
-
         return $this->render("/profile/profile.html.twig");
-
     }
 
+    //TODO edit user
+    #[Route('/profile/edit/{id}', name: 'editUser')]
+    public function updateProfile(int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+
+        $user->setUsername('New user name!');
+        $entityManager->flush();
+
+        return $this->redirectToRoute('profile');
+    }
+
+    //TODO delete user
+    #[Route('/profile/delete/{id}', name: 'deleteUser')]
+    public function deleteProfile(int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $session = new Session();
+        $session->invalidate();
+
+        return $this->redirectToRoute('home');
+
+
+    }
 }
