@@ -41,4 +41,6 @@ class HomeController extends AbstractController
             ['article' => $article,
             ]);
     }
+
+    
 }

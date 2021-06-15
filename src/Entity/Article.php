@@ -50,6 +50,21 @@ class Article
      */
     private $seller;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $stock;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $prix;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $vendu;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -141,6 +156,42 @@ class Article
     public function setSeller(?User $seller): self
     {
         $this->seller = $seller;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): self
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getVendu(): ?int
+    {
+        return $this->vendu;
+    }
+
+    public function setVendu(int $vendu): self
+    {
+        $this->vendu = $vendu;
 
         return $this;
     }
