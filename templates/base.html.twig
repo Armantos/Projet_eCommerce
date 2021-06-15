@@ -63,6 +63,12 @@
                         <li class="nav-item">
                             <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
                         </li>
+
+                        {% if is_granted("ROLE_ADMIN") %}
+                        <li class="nav-item">
+                            <a href="{{ path('admin') }}" class="nav-link">Administration</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </ul>
                 {% endif %}

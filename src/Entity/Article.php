@@ -58,12 +58,12 @@ class Article
     /**
      * @ORM\Column(type="integer")
      */
-    private $prix;
+    private $price;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $vendu;
+    private $nbSold;
 
     public function __construct()
     {
@@ -172,26 +172,26 @@ class Article
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrice(): ?int
     {
-        return $this->prix;
+        return $this->price;
     }
 
-    public function setPrix(int $prix): self
+    public function setPrice(int $price): self
     {
-        $this->prix = $prix;
+        $this->price = $price;
 
         return $this;
     }
 
-    public function getVendu(): ?int
+    public function getNbSold(): ?int
     {
-        return $this->vendu;
+        return $this->nbSold;
     }
 
-    public function setVendu(int $vendu): self
+    public function setNbSold(int $nbSold): self
     {
-        $this->vendu = $vendu;
+        $this->nbSold = $nbSold;
 
         return $this;
     }

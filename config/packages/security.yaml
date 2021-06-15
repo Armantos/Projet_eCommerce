@@ -5,6 +5,9 @@ security:
             # Use native password hasher, which auto-selects the best
             # possible hashing algorithm (starting from Symfony 5.3 this is "bcrypt")
             algorithm: auto
+        App\Entity\Admin:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers

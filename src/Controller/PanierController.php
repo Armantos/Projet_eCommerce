@@ -11,7 +11,7 @@ class PanierController extends AbstractController
     #[Route('/NABIL', name: 'NABIL')]
     public function index(): Response
     {
-        return $this->render('panier/index.html.twig', [
+        return $this->render('cart/cart.html.twig', [
             'controller_name' => 'PanierController',
         ]);
     }
