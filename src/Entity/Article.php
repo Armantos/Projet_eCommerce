@@ -48,7 +48,7 @@ class Article
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $author;
+    private $seller;
 
     /**
      * @ORM\Column(type="integer")
@@ -148,14 +148,14 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getSeller(): ?User
     {
-        return $this->author;
+        return $this->seller;
     }
 
-    public function setAuthor(?User $author): self
+    public function setSeller(?User $seller): self
     {
-        $this->author = $author;
+        $this->seller = $seller;
 
         return $this;
     }
