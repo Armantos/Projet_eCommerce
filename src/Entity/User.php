@@ -189,12 +189,12 @@ class User implements UserInterface, \Serializable
 
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        // Implement eraseCredentials() method.
     }
 
     public function __call(string $name, array $arguments)
     {
-        // TODO: Implement @method string getUserIdentifier()
+        //Implement @method string getUserIdentifier()
     }
 
     public function serialize()

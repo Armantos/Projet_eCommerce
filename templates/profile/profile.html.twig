@@ -15,6 +15,7 @@
                 <p class="email"> Votre email : {{ app.user.email }}</p>
                 <p class="orders"> Vos commandes en cours: //TODO</p>
                 <p class="deleteAccount"> Supprimer votre compte //TODO</p>
+                <a href="{{ path('editUser', {'id':app.user.id}) }}" class="btn btn-primary">Modifier Compte (change uniquement le pseudo pour l'instant)</a>
                 <a href="{{ path('deleteUser', {'id':app.user.id}) }}" class="btn btn-primary">Supprimer Compte</a>
             </div>
         </div>

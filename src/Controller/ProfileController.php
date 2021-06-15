@@ -36,7 +36,6 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('profile');
     }
 
-    //TODO delete user
     #[Route('/profile/delete/{id}', name: 'deleteUser')]
     public function deleteProfile(int $id): Response
     {
