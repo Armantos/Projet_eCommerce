@@ -34,9 +34,14 @@
             <tfoot>
             <tr>
                 <td colspan="3">Total à payer :</td>
-
                 <td>{{ total }} €</td>
-                <td><a href="{{ path('hello') }}">Valider la commande</a></td>
+                {% if not is_granted("ROLE_USER") %}
+                    <td><a class="nav-link" href="{{ path('register') }}">Créer un compte pour finaliser la commande</a></td>
+                {% endif %}
+
+                {% if is_granted("ROLE_USER") %}
+                    <td><a href="{{ path('hello') }}">Valider la commande</a></td>
+                {% endif %}
             </tr>
             </tfoot>
 
