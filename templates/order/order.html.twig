@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commandes{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="container">
+            <h1 class="title p-1">Informations de vos commandes en cours</h1>
+        </div>
+
+        {% if items | length > 0 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th></th>
+                <tr>
+                </thead>
+
+                <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ order.article.title }}</td>
+                    <td>{{ order.article.price }} €</td>
+                    <td>"Quantité"</td>
+                    <td>"Prix total"</td>
+                <tr>
+
+                    {% endfor %}
+                </tbody>
+
+                <tfoot>
+                <tr>
+                    <td colspan="3">Prix total de la commande :</td>
+                    <td>{{ total }} €</td>
+                </tr>
+                </tfoot>
+
+            </table>
+
+        {% else %}
+            <p> Vous n'avez aucune commande en cours </p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^1.4.0",
+    "webpack-notifier": "^1.13.0"
+  }
+}
