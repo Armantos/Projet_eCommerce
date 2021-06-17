@@ -10,3 +10,7 @@ Mise à jour avec la derniere version :
 
 Importation base de données :  
 phpmyadmin > Importation > ecommerce.sql
+
+Ou alors depuis symfony :  
+>symfony console make:migration 
+>symfony console doctrine:migrations:migrate  
