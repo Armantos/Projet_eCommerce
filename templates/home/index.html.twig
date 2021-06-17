@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
@@ -21,7 +19,7 @@
     </style>
     -->
 
-    <h1>Bienvenue TESTGIT sur la page d'accueil</h1>
+    <h1>Bienvenue sur la page d'accueil</h1>
 
     <!--
 <div class="example-wrapper">
@@ -44,17 +42,14 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ article.title }}</h5>
                     <h6 class="card-stock">Quantité Dispo : {{ article.Stock }}</h6>
-                    <h7 class="card-price">Prix : {{ article.prix }}</h7>
-                    <h8 class="card-sold">Achetés : {{ article.vendu }}</h8>
+                    <h7 class="card-price">Prix : {{ article.price }}</h7>
+                    <h8 class="card-sold">Achetés : {{ article.nbSold }}</h8>
 
                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
 
                     <!--path = name ==>show , argument id = objet {'id':article.id}-->
                     <a href="{{ path('show', {'id':article.id}) }}" class="btn btn-primary">En savoir plus</a>
-                    <a href="{{ path('cart_add', {'id':article.id}) }}" " class=" btn btn-primary">Ajouter</a>
-
-
-
+                    <a href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter</a>
 
                 </div>
             </div>

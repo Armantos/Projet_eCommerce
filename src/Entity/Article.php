@@ -58,17 +58,23 @@ class Article
     /**
      * @ORM\Column(type="integer")
      */
-    private $prix;
+    private $price;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $vendu;
+    private $nbSold;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="purchase")
+     */
+    private $orders;
 
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,27 +178,58 @@ class Article
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrice(): ?int
     {
-        return $this->prix;
+        return $this->price;
     }
 
-    public function setPrix(int $prix): self
+    public function setPrice(int $price): self
     {
-        $this->prix = $prix;
+        $this->price = $price;
 
         return $this;
     }
 
-    public function getVendu(): ?int
+    public function getNbSold(): ?int
     {
-        return $this->vendu;
+        return $this->nbSold;
     }
 
-    public function setVendu(int $vendu): self
+    public function setNbSold(int $nbSold): self
     {
-        $this->vendu = $vendu;
+        $this->nbSold = $nbSold;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addPurchase($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removePurchase($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->title;
     }
 }

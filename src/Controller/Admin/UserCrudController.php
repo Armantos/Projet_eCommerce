@@ -3,16 +3,32 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class UserCrudController extends AbstractCrudController
 {
+    // it must return a FQCN (fully-qualified class name) of a Doctrine ORM entity
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
     /*
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('...')
+            ->setDateFormat('...')
+            // ...
+            ;
+    }
+    */
+
+/*
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -21,5 +37,5 @@ class UserCrudController extends AbstractCrudController
             TextEditorField::new('description'),
         ];
     }
-    */
+*/
 }
