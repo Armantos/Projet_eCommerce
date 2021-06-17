@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos commandes{% endblock %}
+
+{% block body %}
+    {% if orders | length > 0 %}
+    <p>Liste de vos commandes en cours</p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Action</th>
+            <tr>
+            </thead>
+
+            <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.article.title }}</td>
+                <td>{{ order.article.price }} €</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.article.price * order.quantity }}</td>
+            <tr>
+
+                {% endfor %}
+            </tbody>
+
+            <tfoot>
+            <tr>
+                <td colspan="3">Total de la commande :</td>
+                <td>{{ total }} €</td>
+            </tr>
+            </tfoot>
+        </table>
+
+    {% else %}
+        <p> Votre panier est vide </p>
+    {% endif %}
+{% endblock %}

@@ -22,9 +22,7 @@ class CartController extends AbstractController
         $cartWithData = [];
 
         foreach ($cart as $id => $quantity) {
-
             $cartWithData[] = [
-
                 'article' => $articleRepository->find($id),
                 'quantity' => $quantity,
             ];
@@ -42,7 +40,6 @@ class CartController extends AbstractController
             'total' => $total
         ]);
     }
-
 
     #[Route('/cart/add/{id}', name: 'addCart')]
     public function addCart($id, SessionInterface $session) : Response
@@ -71,5 +68,4 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute(("cart"));
     }
-
 }

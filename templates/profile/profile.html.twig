@@ -17,6 +17,7 @@
                 <p class="deleteAccount"> Supprimer votre compte //TODO</p>
                 <a href="{{ path('editUser', {'id':app.user.id}) }}" class="btn btn-primary">Modifier Compte (change uniquement le pseudo pour l'instant)</a>
                 <a href="{{ path('deleteUser', {'id':app.user.id}) }}" class="btn btn-primary">Supprimer Compte</a>
+                <a href="{{ path('showOrders', {'id':app.user.id}) }}" class="btn btn-primary">Voir les commandes en cours</a>
             </div>
         </div>
     {% endif %}

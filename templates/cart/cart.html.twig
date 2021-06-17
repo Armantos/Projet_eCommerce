@@ -35,12 +35,15 @@
             <tr>
                 <td colspan="3">Total à payer :</td>
                 <td>{{ total }} €</td>
+
                 {% if not is_granted("ROLE_USER") %}
                     <td><a class="nav-link" href="{{ path('register') }}">Créer un compte pour finaliser la commande</a></td>
                 {% endif %}
 
                 {% if is_granted("ROLE_USER") %}
-                    <td><a href="{{ path('hello') }}">Valider la commande</a></td>
+                   {#  <td><a href="{{ path('order',app.user.id, items ) }}">Valider la commande</a></td>#}
+                    <td><a href="{{ path('order',{'id':app.user.id} ) }}">Valider la commande</a></td>
+
                 {% endif %}
             </tr>
             </tfoot>

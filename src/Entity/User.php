@@ -60,9 +60,15 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="buyer")
+     */
+    private $orders;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -226,6 +232,36 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setBuyer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getBuyer() === $this) {
+                $order->setBuyer(null);
+            }
+        }
 
         return $this;
     }
