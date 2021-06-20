@@ -1,0 +1,13 @@
+.blue {
+    height: 50px;
+    background-color: deepskyblue;
+}
+
+.black {
+    height: 100px;
+    background-color: black;
+}
+
+.fit-picture {
+    width: 250px;
+}
