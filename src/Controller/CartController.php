@@ -90,9 +90,9 @@ class CartController extends AbstractController
                 'price_data' => [
                     'currency' => 'eur',
                     'product_data' => [
-                        'name' => 'Tshirt',
+                        'name' => 'DIDIER ACHVAR',
                     ],
-                    'unit_amount' =>'40000' 
+                    'unit_amount' => '40000',
                 ],
                 'quantity' => 1,
             ]],
