@@ -90,14 +90,14 @@ class CartController extends AbstractController
                 'price_data' => [
                     'currency' => 'eur',
                     'product_data' => [
-                        'name' => 'DIDIER ACHVAR',
+                        'name' => 'DIDIER ACHVAR', // TODO
                     ],
-                    'unit_amount' => '40000',
+                    'unit_amount' => '40000' ///  TODO  
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL), // TODO : Recup données ORDER après le paiemennt 
             'cancel_url' => $this->generateUrl('error', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
         return new JsonResponse(['id' => $session->id]);
