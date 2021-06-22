@@ -6,11 +6,17 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @method string getUserIdentifier()
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User
+class User implements UserInterface, \Serializable, \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -35,7 +41,7 @@ class User
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique = true)
      */
     private $email;
 
@@ -45,18 +51,24 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="author")
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="seller")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="buyer")
+     */
+    private $orders;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,9 +81,10 @@ class User
         return $this->username;
     }
 
-    public function __toString(){
-        return $this->firstName.' ' .$this->lastName;
-}
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 
     public function setUsername(string $username): self
     {
@@ -116,7 +129,7 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): ?string //?string = string ou null
     {
         return $this->password;
     }
@@ -124,18 +137,6 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -152,7 +153,7 @@ class User
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
-            $article->setAuthor($this);
+            $article->setSeller($this);
         }
 
         return $this;
@@ -162,8 +163,103 @@ class User
     {
         if ($this->articles->removeElement($article)) {
             // set the owning side to null (unless already changed)
-            if ($article->getAuthor() === $this) {
-                $article->setAuthor(null);
+            if ($article->getSeller() === $this) {
+                $article->setSeller(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+
+    /*
+     * There are two things you need to store in the database:
+     * the encoded password and the random salt value that was used to encode the password.
+     * Most modern encoders - including the one we will use - store the salt value as part of the encoded password string.
+     * In other words, we only need this one field.
+     * And, the getSalt() method can stay blank
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        // Implement eraseCredentials() method.
+    }
+
+    public function __call(string $name, array $arguments)
+    {
+        //Implement @method string getUserIdentifier()
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->firstName,
+            $this->lastName,
+            $this->email,
+            $this->password,
+            $this->articles
+        ]);
+    }
+
+    public function unserialize($data)
+    {
+        list(
+            $this->id,
+            $this->username,
+            $this->firstName,
+            $this->lastName,
+            $this->email,
+            $this->password,
+            $this->articles
+            ) = unserialize($data, ['allow classes' => false]);
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setBuyer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getBuyer() === $this) {
+                $order->setBuyer(null);
             }
         }
 

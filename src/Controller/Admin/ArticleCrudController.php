@@ -25,10 +25,12 @@ class ArticleCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             TextEditorField::new('content'),
+            IdField::new('prix')->hideOnForm(),
+            IdField::new('stock')->hideOnForm(),
             ImageField::new('image')->setUploadDir("public/assets/eCommerce/images")
                 ->setBasePath("assets/eCommerce/images")
                 ->setRequired(false), //empeche d'ajouter une deuxieme image
-            AssociationField::new('author'),
+            AssociationField::new('seller'),
             AssociationField::new('category'),
         ];
     }

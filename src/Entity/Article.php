@@ -48,12 +48,33 @@ class Article
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $author;
+    private $seller;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $stock;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbSold;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="purchase")
+     */
+    private $orders;
 
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,15 +154,82 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getSeller(): ?User
     {
-        return $this->author;
+        return $this->seller;
     }
 
-    public function setAuthor(?User $author): self
+    public function setSeller(?User $seller): self
     {
-        $this->author = $author;
+        $this->seller = $seller;
 
         return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): self
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getNbSold(): ?int
+    {
+        return $this->nbSold;
+    }
+
+    public function setNbSold(int $nbSold): self
+    {
+        $this->nbSold = $nbSold;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addPurchase($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removePurchase($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->title;
     }
 }
