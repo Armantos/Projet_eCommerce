@@ -61,13 +61,20 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="buyer")
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="buyer")
+     */
+    private $orderItems;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
      */
     private $orders;
+
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
         $this->orders = new ArrayCollection();
     }
 
@@ -237,6 +244,36 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     }
 
     /**
+     * @return Collection|OrderItem[]
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): self
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems[] = $orderItem;
+            $orderItem->setBuyer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): self
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getBuyer() === $this) {
+                $orderItem->setBuyer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection|Order[]
      */
     public function getOrders(): Collection
@@ -248,7 +285,7 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     {
         if (!$this->orders->contains($order)) {
             $this->orders[] = $order;
-            $order->setBuyer($this);
+            $order->setUser($this);
         }
 
         return $this;
@@ -258,11 +295,12 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     {
         if ($this->orders->removeElement($order)) {
             // set the owning side to null (unless already changed)
-            if ($order->getBuyer() === $this) {
-                $order->setBuyer(null);
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
             }
         }
 
         return $this;
     }
+
 }

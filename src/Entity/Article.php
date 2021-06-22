@@ -66,15 +66,15 @@ class Article
     private $nbSold;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="purchase")
+     * @ORM\ManyToMany(targetEntity=OrderItem::class, mappedBy="purchase")
      */
-    private $orders;
+    private $orderItems;
 
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->createdAt = new \DateTime();
-        $this->orders = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,33 +203,30 @@ class Article
     }
 
     /**
-     * @return Collection|Order[]
+     * @return Collection|OrderItem[]
      */
-    public function getOrders(): Collection
+    public function getOrderItems(): Collection
     {
-        return $this->orders;
+        return $this->orderItems;
     }
 
-    public function addOrder(Order $order): self
+    public function addOrderItem(OrderItem $orderItem): self
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->addPurchase($this);
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems[] = $orderItem;
+            $orderItem->addPurchase($this);
         }
 
         return $this;
     }
 
-    public function removeOrder(Order $order): self
+    public function removeOrderItem(OrderItem $orderItem): self
     {
-        if ($this->orders->removeElement($order)) {
-            $order->removePurchase($this);
+        if ($this->orderItems->removeElement($orderItem)) {
+            $orderItem->removePurchase($this);
         }
 
         return $this;
     }
 
-    public function __toString() {
-        return $this->title;
-    }
 }

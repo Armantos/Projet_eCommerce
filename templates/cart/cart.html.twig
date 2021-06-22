@@ -41,8 +41,8 @@
                 {% endif %}
 
                 {% if is_granted("ROLE_USER") %}
-                   {#  <td><a href="{{ path('order',app.user.id, items ) }}">Valider la commande</a></td>#}
-                    <td><a href="{{ path('order',{'id':app.user.id} ) }}">Valider la commande</a></td>
+                   {#  <td><a href="{{ path('order',app.user.id, items ) }}">Valider la commande</a></td>
+                    <td><a href="{{ path('order',{'id':app.user.id, 'itemId':items.id} ) }}">Valider la commande</a></td>#}
 
                 {% endif %}
             </tr>

@@ -16,19 +16,26 @@ class OrderController extends AbstractController
 {
 
     //TODO ne fonctionne pas
-    #[Route('/order/{id}', name: 'order')]
-  //  #[Route('/order/{id}/{items}', name: 'order')]
+    //  #[Route('/order', name: 'order')]
+    #[Route('/order/{id}/{items}', name: 'order')]
 
-    public function createOrder(int $id): Response
+    public function createOrder($id, $items): Response
    // public function createOrder(int $id,Article $items): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
         $order = new Order();
-        $user = $entityManager->getRepository(User::class)->find($id);
 
-        $order->setBuyer($user);
-        //$order->addPurchase($items);
+       // $user = $entityManager->getRepository(User::class)->find($id);
+
+        $repoUser = $this->getDoctrine()->getRepository(User::class);
+        $repoArticle = $this->getDoctrine()->getRepository(Article::class);
+
+        $user = $repoUser->find($id);
+       // $article = $repoArticle->find($items);
+
+        $order->setUser($user);
+        $order->setListArticle($items);
 
         $entityManager->persist($order);
         $entityManager->flush();
