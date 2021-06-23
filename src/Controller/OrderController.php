@@ -15,16 +15,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class OrderController extends AbstractController
 {
 
-
     #[Route('/order/{id}', name: 'order')]
         public function createOrder(SessionInterface $session, ArticleRepository $articleRepository, UserRepository $userRepository, $id): Response
-
     {
-
         //////////////////////creation de la commande///////////////////////
         $order = new Order();
 
@@ -37,7 +35,6 @@ class OrderController extends AbstractController
 
         //Creation de la commande (vide à la création)
         $entityManager->persist($order);
-        $entityManager->flush();
         //////////////////////creation de la commande///////////////////////
 
         //////////////////////Ajout des orderItem///////////////////////

@@ -65,10 +65,6 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
      */
     private $orders;
 
-
-
-
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();

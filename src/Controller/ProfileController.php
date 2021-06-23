@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Order;
+use App\Entity\OrderItem;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -77,14 +78,19 @@ class ProfileController extends AbstractController
     #[Route('/profile/showOrders/{id}', name: 'showOrders')]
     public function showOrders(int $id): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Order::class);
+        $repoOrder = $this->getDoctrine()->getRepository(Order::class);
+        $orders = $repoOrder->findAll();
 
-        $orders = $repo->findAll();
+        $repoOrderItem = $this->getDoctrine()->getRepository(OrderItem::class);
+        $orderItems = $repoOrderItem->findAll();
 
-        //dd($articles); //debug pour afficher le tableau d'articles
+        $repoArticle = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repoArticle->findAll();
 
         return $this->render("/profile/orders.html.twig",
             ['orders' => $orders,
+             'orderItems' => $orderItems,
+             'articles' => $articles,
             ]);
     }
 }

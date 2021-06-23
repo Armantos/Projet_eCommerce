@@ -27,7 +27,11 @@ class Order
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="orderDone")
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="orderDone",fetch="EAGER")
+     *
+     * Option fetch eager obligatoire sinon la collection est vide
      */
     private $orderItem;
 
@@ -82,4 +86,5 @@ class Order
 
         return $this;
     }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OrderItemRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,10 +30,12 @@ class OrderItem
     private $quantity;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="orderItem")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $orderDone;
+    private $orderDone; //Le mot "order" est deja reserve par le systeme
 
     public function getId(): ?int
     {
