@@ -17,6 +17,8 @@
             par <span class="seller">{{ article.seller }}</span></p>
             <h2 class="title">{{ article.title }}</h2>
             <p class="content text-justify">{{ article.content | raw }}</p> <!--raw permet de convertir le html-->
+            <a href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter au panier</a>
+
         </div>
     </div>
 {% endblock %}
