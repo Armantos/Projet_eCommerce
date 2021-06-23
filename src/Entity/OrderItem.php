@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\OrderItemRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,92 +18,61 @@ class OrderItem
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orderItems")
+     * @ORM\OneToOne(targetEntity=Article::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $buyer;
+    private $article;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="orderItems")
+     * @ORM\Column(type="integer")
      */
-    private $purchase;
+    private $quantity;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="orderItem")
+     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="orderItem")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $orders;
-
-    public function __construct()
-    {
-        $this->purchase = new ArrayCollection();
-        $this->orders = new ArrayCollection();
-    }
+    private $orderDone;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getBuyer(): ?User
+    public function getArticle(): ?Article
     {
-        return $this->buyer;
+        return $this->article;
     }
 
-    public function setBuyer(?User $buyer): self
+    public function setArticle(Article $article): self
     {
-        $this->buyer = $buyer;
+        $this->article = $article;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Article[]
-     */
-    public function getPurchase(): Collection
+    public function getQuantity(): ?int
     {
-        return $this->purchase;
+        return $this->quantity;
     }
 
-    public function addPurchase(Article $purchase): self
+    public function setQuantity(int $quantity): self
     {
-        if (!$this->purchase->contains($purchase)) {
-            $this->purchase[] = $purchase;
-        }
+        $this->quantity = $quantity;
 
         return $this;
     }
 
-    public function removePurchase(Article $purchase): self
+    public function getOrderDone(): ?Order
     {
-        $this->purchase->removeElement($purchase);
+        return $this->orderDone;
+    }
+
+    public function setOrderDone(?Order $orderDone): self
+    {
+        $this->orderDone = $orderDone;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Order[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->addOrderItem($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            $order->removeOrderItem($this);
-        }
-
-        return $this;
-    }
 }

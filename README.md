@@ -8,5 +8,13 @@ Première installation (nécessite PHP, symfony et composer d'installés) :
 Mise à jour avec la derniere version :  
 > git pull origin master
 
+Mise à jour de la base de données après modification du code :  
+> symfony console make:migration
+> symfony console doctrine:migrations:migrate
+
 Importation base de données :  
 phpmyadmin > Importation > ecommerce.sql
+
+Ou alors depuis symfony :  
+>symfony console make:migration 
+>symfony console doctrine:migrations:migrate  

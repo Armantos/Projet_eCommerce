@@ -27,12 +27,7 @@ class Order
     private $user;
 
     /**
-     * @ORM\Column(type="array")
-     */
-    private $listArticle = [];
-
-    /**
-     * @ORM\ManyToMany(targetEntity=OrderItem::class, inversedBy="orders")
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="orderDone")
      */
     private $orderItem;
 
@@ -58,18 +53,6 @@ class Order
         return $this;
     }
 
-    public function getListArticle(): ?array
-    {
-        return $this->listArticle;
-    }
-
-    public function setListArticle(array $listArticle): self
-    {
-        $this->listArticle = $listArticle;
-
-        return $this;
-    }
-
     /**
      * @return Collection|OrderItem[]
      */
@@ -82,6 +65,7 @@ class Order
     {
         if (!$this->orderItem->contains($orderItem)) {
             $this->orderItem[] = $orderItem;
+            $orderItem->setOrderDone($this);
         }
 
         return $this;
@@ -89,7 +73,12 @@ class Order
 
     public function removeOrderItem(OrderItem $orderItem): self
     {
-        $this->orderItem->removeElement($orderItem);
+        if ($this->orderItem->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getOrderDone() === $this) {
+                $orderItem->setOrderDone(null);
+            }
+        }
 
         return $this;
     }

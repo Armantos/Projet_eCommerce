@@ -56,7 +56,7 @@ class Article
     private $stock;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $price;
 
@@ -65,16 +65,12 @@ class Article
      */
     private $nbSold;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=OrderItem::class, mappedBy="purchase")
-     */
-    private $orderItems;
+
 
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->createdAt = new \DateTime();
-        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,12 +174,12 @@ class Article
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): self
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
@@ -202,31 +198,5 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection|OrderItem[]
-     */
-    public function getOrderItems(): Collection
-    {
-        return $this->orderItems;
-    }
-
-    public function addOrderItem(OrderItem $orderItem): self
-    {
-        if (!$this->orderItems->contains($orderItem)) {
-            $this->orderItems[] = $orderItem;
-            $orderItem->addPurchase($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrderItem(OrderItem $orderItem): self
-    {
-        if ($this->orderItems->removeElement($orderItem)) {
-            $orderItem->removePurchase($this);
-        }
-
-        return $this;
-    }
 
 }
