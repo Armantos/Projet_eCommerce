@@ -17,7 +17,3 @@ Mise à jour de la base de données après modification du code :
 
 Importation base de données :  
 phpmyadmin > Importation > ecommerce.sql
-
-Ou alors depuis symfony :  
->symfony console make:migration  
->symfony console doctrine:migrations:migrate  
