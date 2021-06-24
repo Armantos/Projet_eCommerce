@@ -14,15 +14,18 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <br/>
+    <br/>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <h1 style="background-color: black ; color: lightskyblue ; width: 500px">Veuillez vous identifier</h1>
+    <br/>
+    <label for="inputEmail">Email</label>
+    <input style="width: 400px" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <br/>
+    <label for="inputPassword">Password</label>
+    <input style="width: 400px" type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -34,9 +37,9 @@
             </label>
         </div>
     #}
+    <br/>
+    <br/>
+    <button style="background-color: black ; color: lightskyblue" type="button" class="btn btn-primary btn-lg">S'identifier</button>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
 </form>
 {% endblock %}
