@@ -19,5 +19,5 @@ Importation base de données :
 phpmyadmin > Importation > ecommerce.sql
 
 Ou alors depuis symfony :  
->symfony console make:migration 
+>symfony console make:migration  
 >symfony console doctrine:migrations:migrate  
