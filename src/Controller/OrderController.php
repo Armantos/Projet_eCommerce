@@ -57,6 +57,8 @@ class OrderController extends AbstractController
         $entityManager->persist($order);
         $entityManager->flush();
 
+        $session->remove('cart');
+
         return $this->redirectToRoute('home');
     }
 }

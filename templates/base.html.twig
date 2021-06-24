@@ -17,9 +17,8 @@
     {% endblock %}
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
 
-    {% block javascripts %}
-        {# {{ encore_entry_script_tags('app') }} #}
-    {% endblock %}
+    <script src="https://js.stripe.com/v3/"></script>
+
 </head>
 
 
@@ -65,6 +64,7 @@
                         </li>
 
                         {% if is_granted("ROLE_ADMIN") %}
+                        <!--Si l'utilisateur a le role admin, afficher le bouton suivant-->
                         <li class="nav-item">
                             <a href="{{ path('admin') }}" class="nav-link">Administration</a>
                         </li>
@@ -72,12 +72,6 @@
                     </ul>
                 </ul>
                 {% endif %}
-
-                <!--Barre de recherche à implementer ?-->
-                <form class="d-flex" data-children-count="1">
-                    <input class="form-control me-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -86,6 +80,9 @@
 <div class="container">
 
     {% block body %}{% endblock %}
+    {% block javascripts %}
+        {# {{ encore_entry_script_tags('app') }} #}
+    {% endblock %}
 </div>
 
 </body>
