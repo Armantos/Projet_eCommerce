@@ -13,7 +13,6 @@
                 <th>Total</th>
                 <th>Action</th>
             <tr>
-                <script src="https://js.stripe.com/v3/"></script>
 
             </thead>
 
@@ -44,16 +43,23 @@
                 {% endif %}
 
                 {% if is_granted("ROLE_USER") %}
-                    <td><a href="{{ path('order',{'id':app.user.id}) }}">Valider la commande</a></td>
-                    {# <td><a href="{{ path('order',app.user.id, items ) }}">Valider la commande</a></td>
-                    <td><a href="{{ path('order',{'id':app.user.id, 'itemId':items.id} ) }}">Valider la commande</a></td>
+
+                     <td><a href="{{ path('order',{'id':app.user.id}) }}">Valider la commande</a></td>
+
                     <td>
                         <button id="checkout-button">Payer</button>
                     </td>
 
+                    {% block javascripts %}
+                    {# {{ encore_entry_script_tags('app') }} #}
+
                     <script type="text/javascript">
                         // Create an instance of the Stripe object with your publishable API key
-                        var stripe = Stripe('pk_test_51J4SPfIocXlW1GMrkthGO5TkYHOrixLggZaLPAfbXcjAwawPhWQdR50K1FkLrEETAIZLaSb6fc6hU2jN3adNTVBM009ovClb4L');
+                        //cle Nabil
+                        //   var stripe = Stripe('pk_test_51J4SPfIocXlW1GMrkthGO5TkYHOrixLggZaLPAfbXcjAwawPhWQdR50K1FkLrEETAIZLaSb6fc6hU2jN3adNTVBM009ovClb4L');
+
+                        //cle Armand
+                        var stripe = Stripe('pk_test_51J5GMPL4f65gcecv43PWQy129FOlbM8elcEJ8xAcUvZVSsgvpXtquBCKUc12ZARHvY3kb20mlCLgANAsITyDmYCD00QoTyRF0b');
 
                         var checkoutButton = document.getElementById('checkout-button');
 
@@ -63,7 +69,7 @@
                             fetch('/create-checkout-session', {method: 'POST'}).then(function (response) {
                                 return response.json();
                             }).then(function (session) {
-                                return stripe.redirectToCheckout({sessionId: session.id});
+                                return stripe.redirectToCheckout({sessionId: session.id });
                             }).then(function (result) {
                                 // If `redirectToCheckout` fails due to a browser or network
                                 // error, you should display the localized error message to your
@@ -76,8 +82,7 @@
                             });
                         });
                     </script>
-                    #}
-
+                    {% endblock %}
                 {% endif %}
             </tr>
             </tfoot>

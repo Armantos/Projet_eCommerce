@@ -51,6 +51,7 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('profile');
     }
 
+    //Supprime le compte de l'utilisateur
     #[Route('/profile/delete/{id}', name: 'deleteUser')]
     public function deleteProfile(int $id): Response
     {
@@ -73,6 +74,7 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    //Affiche les commandes passees par l'utilisateur
     #[Route('/profile/showOrders/{id}', name: 'showOrders')]
     public function showOrders(int $id): Response
     {
