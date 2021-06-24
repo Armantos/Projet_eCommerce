@@ -35,12 +35,10 @@ class ProfileController extends AbstractController
             );
         }
 
-        //TODO verifier si les champs ne sont pas vides
-        //TODO verifier si le username n'existe pas deja
-        $user->setUsername('New user name!');
-        $user->setFirstName('New first name!');
-        $user->setLastName('New last name!');
-
+        //TODO ajouter le formulaire de modification des infos
+        $user->setUsername('new username');
+        $user->setFirstName('new firstname');
+        $user->setLastName('new lastname');
         $user->setPassword(
             $passwordHasher->hashPassword(
                 $user,
