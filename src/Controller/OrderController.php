@@ -30,10 +30,8 @@ class OrderController extends AbstractController
 
         //Attribution de l'id de l'acheteur
         $repoUser = $this->getDoctrine()->getRepository(User::class);
-
         $user = $repoUser->find($id);
         $order->setUser($user);
-        $order->setStatus('EN_COURS');
 
         //Creation de la commande (vide à la création)
         $entityManager->persist($order);
@@ -49,7 +47,6 @@ class OrderController extends AbstractController
             $orderItem->setArticle($articleRepository->find($idArticle));
             $orderItem->setQuantity($quantity);
             $orderItem->setOrderDone($order);
-
             $entityManager->persist($orderItem);
 
             //Ajout de l'orderItem dans la commande
