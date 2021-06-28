@@ -23,7 +23,7 @@
             <tr>
                 {#  {{ dump(order) }} pour faire un vardump en twig#}
                 {% for orderItem in orderItems %}
-                <td>{{ order.id }}</td>
+                <td>{{  order.id }}</td>
                 <td>{{ orderItem.article.title }}</td>
                 <td>{{ orderItem.article.price }}</td>
                 <td>{{ orderItem.quantity }}</td>

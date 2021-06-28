@@ -38,7 +38,7 @@ class CheckoutController extends AbstractController
                     'product_data' => [
                         'name' => 'Total à régler',
                     ],
-                    'unit_amount' => 420,
+                    'unit_amount' => 4500 ,
                 ],
                 'quantity' => 1,
             ]],

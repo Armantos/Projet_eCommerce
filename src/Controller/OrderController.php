@@ -47,6 +47,7 @@ class OrderController extends AbstractController
             $orderItem->setArticle($articleRepository->find($idArticle));
             $orderItem->setQuantity($quantity);
             $orderItem->setOrderDone($order);
+            
             $entityManager->persist($orderItem);
 
             //Ajout de l'orderItem dans la commande

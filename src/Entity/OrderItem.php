@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\OrderItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=OrderItemRepository::class)
@@ -23,6 +24,8 @@ class OrderItem
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+  
 
     /**
      * @ORM\Column(type="integer")
@@ -65,7 +68,9 @@ class OrderItem
 
         return $this;
     }
-
+    
+    
+    
     public function getOrderDone(): ?Order
     {
         return $this->orderDone;
