@@ -5,6 +5,9 @@ Première installation (nécessite PHP, symfony et composer d'installés) :
 > cd Projet_eCommerce  
 > composer install  
 
+Si la connexion à bdd ne fonctionne pas :  
+>Modifier le fichier .env avec les bons parametres de connexion
+
 Mise à jour avec la derniere version :  
 > git pull origin master
 

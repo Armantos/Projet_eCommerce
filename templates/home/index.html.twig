@@ -3,16 +3,49 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+    <!--
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-    <h1>Bienvenue sur la page d'accueil</h1>
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+    -->
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8"><h1 style = "background-color: lightskyblue ; width: 980px" >Toutes vos envies de marques au meilleur prix</h1></div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+
+    <br/>
+
+    <!--
+<div class="example-wrapper">
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/Projet_eCommerce/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/Projet_eCommerce/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
+    </ul>
+</div>
+    -->
 
     <div class="row">
         {% for article in articles %}
 
-            <div class="card col-md-4" style="width: 18rem;">
+            <div id="articles" class="card col-md-4" style="width: 20rem ">
                 <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
                     à {{ article.createdAt | date("H:i") }}
-                par <span class="seller">{{ article.seller }}</span></p>
+                <span class="seller">{{ article.seller }}</span></p>
                 <img class="card-img-top" src="/assets/eCommerce/images/{{ article.image }}" alt="{{ article.title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ article.title }}</h5>
@@ -24,11 +57,12 @@
 
                     <!--path = name ==>show , argument id = objet {'id':article.id}-->
                     
-                    <a href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter</a>
-                    <a href="{{ path('show', {'id':article.id}) }}" class="btn btn-primary">En savoir plus</a>
+                    <a style = "background-color: lightskyblue ; width:230px"  href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter au panier</a>
+                    <a style = "background-color: black ; color: lightskyblue ; width:230px" href="{{ path('show', {'id':article.id}) }}" class="btn btn-primary">En savoir plus</a>
 
                 </div>
             </div>
+
 
         {% endfor %}
     </div>

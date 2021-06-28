@@ -6,6 +6,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style_1.css">
+
 
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -15,7 +18,7 @@
     {% block stylesheets %}
         {# {{ encore_entry_link_tags('app') }} #}
     {% endblock %}
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+
 
     <script src="https://js.stripe.com/v3/"></script>
 
@@ -23,81 +26,88 @@
 
 
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Projet DevWeb</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/">Home
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <FONT size="6pt">
+                <a style = "color: lightskyblue";class="navbar-brand" href="/">ANOmark's  &nbsp; </a>
+                </FONT>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    {% if not is_granted("ROLE_USER") %}
-                        <!-- Si l'utilisateur n'est pas connecte, afficher les boutons suivants-->
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="login">Login</a>
+                            <a class="nav-link active" href="/">Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('register') }}">Créer un compte</a>
-                        </li>
+
+                        {% if not is_granted("ROLE_USER") %}
+                            <!-- Si l'utilisateur n'est pas connecte, afficher les boutons suivants-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('register') }}">Créer un compte &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</a>
+                            </li>
+                        {% endif %}
+
+                        {% if is_granted("ROLE_USER") %}
+                        <!--Si l'utilisateur est connecte, afficher les boutons suivants-->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="{{ path('cart') }}" class="nav-link">Panier</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('profile') }}" class="nav-link">Paramètres</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+                            </li>
+
+                            {% if is_granted("ROLE_ADMIN") %}
+                            <li class="nav-item">
+                                <a href="{{ path('admin') }}" class="nav-link">Administration</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </ul>
                     {% endif %}
 
-                    {% if is_granted("ROLE_USER") %}
-                    <!--Si l'utilisateur est connecte, afficher les boutons suivants-->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="{{ path('cart') }}" class="nav-link">Panier</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('profile') }}" class="nav-link">Paramètres</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
-                        </li>
-
-                        {% if is_granted("ROLE_ADMIN") %}
-                        <!--Si l'utilisateur a le role admin, afficher le bouton suivant-->
-                        <li class="nav-item">
-                            <a href="{{ path('admin') }}" class="nav-link">Administration</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </ul>
-                {% endif %}
+                    <!--Barre de recherche à implementer ?-->
+                    <form class="d-flex" data-children-count="1">
+                        <!--<input class="form-control me-sm-2" type="text" placeholder="Search">
+                        <button style = "background-color: lightskyblue"; class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+                    </form>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<div class="container">
+    <div class="container">
 
-    {% block body %}{% endblock %}
-    {% block javascripts %}
-        {# {{ encore_entry_script_tags('app') }} #}
-    {% endblock %}
-</div>
+        {% block body %}{% endblock %}
+    </div>
+
+        <footer id="footer">
+            <!-- Copyright -->
+
+            <div class=" text-center p-2
+        " style="background-color: rgba(0, 0, 0, 0.05);">
+                © 2021 Copyright:
+                <p class="text-reset fw-bold"> Armand HURAULT, Ouriel MAMAN, Nabil EL BARKAOUI</p>
+            </div>
+
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
 
 </body>
 
-<footer id="footer">
-    <!-- Copyright -->
 
-    <div class=" text-center p-4
-    " style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2021 Copyright:
-        <p class="text-reset fw-bold"> Armand HURAULT, Ouriel MAMAN, Nabil EL BARKAOUI</p>
-    </div>
-
-    <!-- Copyright -->
-</footer>
-<!-- Footer -->
 
 </html>
