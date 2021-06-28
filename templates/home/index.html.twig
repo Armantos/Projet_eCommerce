@@ -3,34 +3,8 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <!--
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
 
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-    </style>
-    -->
-    <br/>
-    <h1 style = "background-color: lightskyblue ; width: 980px" >Toutes vos envies de marques au meilleur prix</h1>
-    <br/>
-
-    <!--
-<div class="example-wrapper">
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/Projet_eCommerce/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/Projet_eCommerce/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
-    -->
+    <h1>Bienvenue sur la page d'accueil</h1>
 
     <div class="row">
         {% for article in articles %}
@@ -50,8 +24,8 @@
 
                     <!--path = name ==>show , argument id = objet {'id':article.id}-->
                     
-                    <a style = "background-color: lightskyblue ; width:230px"  href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter au panier</a>
-                    <a style = "background-color: black ; color: lightskyblue ; width:230px" href="{{ path('show', {'id':article.id}) }}" class="btn btn-primary">En savoir plus</a>
+                    <a href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter</a>
+                    <a href="{{ path('show', {'id':article.id}) }}" class="btn btn-primary">En savoir plus</a>
 
                 </div>
             </div>

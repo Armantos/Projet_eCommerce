@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Category;
-use App\Entity\Order;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -36,8 +35,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home'); //https://fontawesome.com/v5.15/icons?d=gallery&p=2
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
-        yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Orders', 'fas fa-box', Order::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-users', User::class);
     }
 
 }
