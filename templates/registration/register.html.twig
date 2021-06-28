@@ -1,3 +1,5 @@
+
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
@@ -7,19 +9,44 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <br/>
+    <br/>
+    <h1 style="background-color: black ; color: lightskyblue ; width: 235px">Inscription</h1>
+    <br/>
+    <br/>
 
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.username) }}
-    {{ form_row(registrationForm.firstName) }}
-    {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">{{ form_start(registrationForm) }}</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">{{ form_row(registrationForm.username) }}</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">{{ form_row(registrationForm.firstName) }}</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">{{ form_row(registrationForm.lastName) }}</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">{{ form_row(registrationForm.email) }}</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">{{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">{{ form_row(registrationForm.agreeTerms) }}</div>
+        </div>
+    </div>
 
-       {{ form_row(registrationForm.agreeTerms) }}
-
-    <button type="submit" class="btn">Register</button>
+    <br/>
+    <br/>
+    <button style="color: lightskyblue" class="btn btn-lg btn-primary" type="submit" >Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

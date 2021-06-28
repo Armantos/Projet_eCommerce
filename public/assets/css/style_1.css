@@ -1,0 +1,30 @@
+
+
+.blue {
+    height: 50px;
+    background-color: deepskyblue;
+}
+
+.black {
+    height: 100px;
+    background-color: black;
+}
+
+.fit-picture {
+    width: 250px;
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0; padding: 0;
+}
+body{
+    background-color: lightgrey;
+    display : table;
+    width: 100%;
+}
+footer {
+    display : table-row;
+    height: 100px; /* à titre d'exemple */
+}
