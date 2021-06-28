@@ -50,12 +50,7 @@
                             <a class="nav-link" href="login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('register') }}">Créer un compte &nbsp; &nbsp; &nbsp;
-                                &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-                                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                                &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</a>
+                            <a class="nav-link" href="{{ path('register') }}">Créer un compte</a>
                         </li>
                     {% endif %}
 
@@ -69,7 +64,7 @@
                             <a href="{{ path('profile') }}" class="nav-link">Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+                            <a href="{{ path('app_logout') }}" class="nav-link">Déconnexion</a>
                         </li>
 
                         {% if is_granted("ROLE_ADMIN") %}
@@ -87,7 +82,6 @@
 </header>
 
 <div class="container">
-
     {% block body %}{% endblock %}
 </div>
 
