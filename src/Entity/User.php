@@ -61,7 +61,7 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="buyer")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
      */
     private $orders;
 
@@ -248,7 +248,7 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     {
         if (!$this->orders->contains($order)) {
             $this->orders[] = $order;
-            $order->setBuyer($this);
+            $order->setUser($this);
         }
 
         return $this;
@@ -258,11 +258,13 @@ class User implements UserInterface, \Serializable, \Symfony\Component\Security\
     {
         if ($this->orders->removeElement($order)) {
             // set the owning side to null (unless already changed)
-            if ($order->getBuyer() === $this) {
-                $order->setBuyer(null);
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
             }
         }
 
         return $this;
     }
+
+
 }

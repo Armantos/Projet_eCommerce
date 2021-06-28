@@ -19,7 +19,6 @@
         {# {{ encore_entry_link_tags('app') }} #}
     {% endblock %}
 
-
     {% block javascripts %}
         {# {{ encore_entry_script_tags('app') }} #}
     {% endblock %}
@@ -27,6 +26,33 @@
 
 
 <body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <h1 style="color: lightskyblue" ;class="navbar-brand" href="/">ANOmark's &nbsp;</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+
+                    {% if not is_granted("ROLE_USER") %}
+                        <!-- Si l'utilisateur n'est pas connecte, afficher les boutons suivants-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('register') }}">Créer un compte</a>
+                        </li>
+                    {% endif %}
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -40,18 +66,17 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/">Home
-                                <span class="visually-hidden">(current)</span>
-                            </a>
+
+                            <a href="{{ path('profile') }}" class="nav-link">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
                         </li>
 
-                        {% if not is_granted("ROLE_USER") %}
-                            <!-- Si l'utilisateur n'est pas connecte, afficher les boutons suivants-->
+                        {% if is_granted("ROLE_ADMIN") %}
                             <li class="nav-item">
-                                <a class="nav-link" href="login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('register') }}">Créer un compte &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</a>
+                                <a href="{{ path('admin') }}" class="nav-link">Administration</a>
+
                             </li>
                         {% endif %}
 
@@ -75,14 +100,9 @@
                             {% endif %}
                         </ul>
                     </ul>
-                    {% endif %}
-
-                    <!--Barre de recherche à implementer ?-->
-                    <form class="d-flex" data-children-count="1">
-                        <input class="form-control me-sm-2" type="text" placeholder="Search">
-                        <button style = "background-color: lightskyblue"; class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
+                </ul>
+                {% endif %}
+                
             </div>
         </nav>
     </header>
@@ -92,21 +112,16 @@
         {% block body %}{% endblock %}
     </div>
 
-        <footer id="footer">
-            <!-- Copyright -->
+<footer id="footer">
+    <!-- Copyright -->
 
-            <div class=" text-center p-2
+    <div class=" text-center p-2
         " style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2021 Copyright:
-                <p class="text-reset fw-bold"> Armand HURAULT, Ouriel MAMAN, Nabil EL BARKAOUI</p>
-            </div>
-
-            <!-- Copyright -->
-        </footer>
-        <!-- Footer -->
+        © 2021 Copyright:
+        <p class="text-reset fw-bold"> Armand HURAULT, Ouriel MAMAN, Nabil EL BARKAOUI</p>
+    </div>
 
 </body>
-
 
 
 </html>

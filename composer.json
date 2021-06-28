@@ -30,7 +30,7 @@
         "symfony/http-client": "5.3.*",
         "symfony/intl": "5.3.*",
         "symfony/mailer": "5.3.*",
-        "symfony/maker-bundle": "^1.31",
+        "symfony/maker-bundle": "^1.32",
         "symfony/mime": "5.3.*",
         "symfony/monolog-bundle": "^3.7",
         "symfony/notifier": "5.3.*",

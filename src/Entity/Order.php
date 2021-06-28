@@ -24,21 +24,25 @@ class Order
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $buyer;
+    private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="orders")
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="orderDone",fetch="EAGER")
+     *
+     * Option fetch eager obligatoire sinon la collection est vide
      */
-    private $purchase;
+    private $orderItem;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $quantity;
+    private $status;
 
     public function __construct()
     {
-        $this->purchase = new ArrayCollection();
+        $this->orderItem = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,52 +50,58 @@ class Order
         return $this->id;
     }
 
-    public function getBuyer(): ?User
+    public function getUser(): ?User
     {
-        return $this->buyer;
+        return $this->user;
     }
 
-    public function setBuyer(?User $buyer): self
+    public function setUser(?User $user): self
     {
-        $this->buyer = $buyer;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * @return Collection|Article[]
+     * @return Collection|OrderItem[]
      */
-    public function getPurchase(): Collection
+    public function getOrderItem(): Collection
     {
-        return $this->purchase;
+        return $this->orderItem;
     }
 
-    public function addPurchase(Article $purchase): self
+    public function addOrderItem(OrderItem $orderItem): self
     {
-        if (!$this->purchase->contains($purchase)) {
-            $this->purchase[] = $purchase;
+        if (!$this->orderItem->contains($orderItem)) {
+            $this->orderItem[] = $orderItem;
+            $orderItem->setOrderDone($this);
         }
 
         return $this;
     }
 
-    public function removePurchase(Article $purchase): self
+    public function removeOrderItem(OrderItem $orderItem): self
     {
-        $this->purchase->removeElement($purchase);
+        if ($this->orderItem->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getOrderDone() === $this) {
+                $orderItem->setOrderDone(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getStatus(): ?string
     {
-        return $this->quantity;
+        return $this->status;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setStatus(string $status): self
     {
-        $this->quantity = $quantity;
+        $this->status = $status;
 
         return $this;
     }
-    
+
 }
