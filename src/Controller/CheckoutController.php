@@ -24,11 +24,8 @@ class CheckoutController extends AbstractController
      */
     public function checkout(SessionInterface $session, ArticleRepository $articleRepository): Response
     {
-        //cle Nabil
-        //  \Stripe\Stripe::setApiKey('sk_test_51J4SPfIocXlW1GMrf5DAoN0i67BaiqnUpEzzBlb5t93a01xUdfqHRU9FGS74Gq1baPp7d5rrywNVtjl3lK9ojJQ500IKG8dBuJ');
-
-        //cle Armand
-        \Stripe\Stripe::setApiKey('sk_test_51J5GMPL4f65gcecvV7Y7KNgbqyqfNX6ASG0E458iWMYlcQgF9VYoMmGAC9Km4wCsaVATcuTwu6TgTlxfjeT4fHse00eqcPvHrw');
+      
+         \Stripe\Stripe::setApiKey('sk_test_51J4SPfIocXlW1GMrf5DAoN0i67BaiqnUpEzzBlb5t93a01xUdfqHRU9FGS74Gq1baPp7d5rrywNVtjl3lK9ojJQ500IKG8dBuJ');
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -38,7 +35,7 @@ class CheckoutController extends AbstractController
                     'product_data' => [
                         'name' => 'Total à régler',
                     ],
-                    'unit_amount' => 420,
+                    'unit_amount' => 10000 ,
                 ],
                 'quantity' => 1,
             ]],

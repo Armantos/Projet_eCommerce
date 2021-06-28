@@ -60,7 +60,7 @@
                             <a href="{{ path('profile') }}" class="nav-link">Paramètres</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+                            <a href="{{ path('app_logout') }}" class="nav-link">Déconnexion</a>
                         </li>
 
                         {% if is_granted("ROLE_ADMIN") %}
@@ -78,7 +78,6 @@
 </header>
 
 <div class="container">
-
     {% block body %}{% endblock %}
     {% block javascripts %}
         {# {{ encore_entry_script_tags('app') }} #}

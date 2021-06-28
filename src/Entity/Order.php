@@ -49,7 +49,17 @@ class Order
     {
         return $this->user;
     }
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
 
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
     public function setUser(?User $user): self
     {
         $this->user = $user;
