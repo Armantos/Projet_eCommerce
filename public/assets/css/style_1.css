@@ -26,5 +26,11 @@ body{
 }
 footer {
     display : table-row;
-    height: 100px; /* à titre d'exemple */
+
+    height: 100px;
 }
+#articles{
+    border-collapse : separate;
+    border-spacing : 10px;
+}
+
