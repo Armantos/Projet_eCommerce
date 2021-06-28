@@ -1,0 +1,37 @@
+
+
+.blue {
+    height: 50px;
+    background-color: deepskyblue;
+}
+
+.black {
+    height: 100px;
+    background-color: black;
+}
+
+.fit-picture {
+    width: 250px;
+}
+
+#contenu {
+    min-height: 100%;
+    position: relative;
+}
+html{
+    height: 100%;
+}
+
+body{
+    background-color: lightgrey;
+    min-height: 100%;
+    padding-bottom: 70px;
+}
+footer{
+    background: lightgrey;
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    bottom:0px;
+    left:0px;
+}
