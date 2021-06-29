@@ -5,22 +5,34 @@
 {% block body %}
 
     <div class="container">
-        <br/>
-        <h1 class="title p-1">{{ article.title}}</h1>
-        <br/>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <br/>
+                <h1 class="title p-1">{{ article.title}}</h1>
+                <br/>
 
-        <div class="img-fluid">
-            <img style="width:500px;height:500px" src="/assets/eCommerce/images/{{ article.image }}" alt="{{ article.title }}"/>
-        </div>
+                <div class="img-fluid">
+                    <img style="width:500px;height:500px" src="/assets/eCommerce/images/{{ article.image }}" alt="{{ article.title }}"/>
+                </div>
 
-        <div class="content">
-            <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
-                à {{ article.createdAt | date("H:i") }}
-            par <span class="seller">{{ article.seller }}</span></p>
-            <h2 class="title">{{ article.title }}</h2>
-            <p class="content text-justify">{{ article.content | raw }}</p> <!--raw permet de convertir le html-->
-            <a style="color: lightskyblue" href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter au panier</a>
+                <div class="content">
+                    <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
+                        à {{ article.createdAt | date("H:i") }}
+                        par <span class="seller">{{ article.seller }}</span></p>
+                    <h2 class="title">{{ article.title }}</h2>
+                    <p class="content text-justify">{{ article.content | raw }}</p> <!--raw permet de convertir le html-->
+                    <a style="color: lightskyblue" href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter au panier</a>
 
-        </div>
+
+                </div>
+                <br/>
+                <br/>
+            </div>
+            </div>
+            <div class="col-sm-3"></div>
+
+
+
     </div>
 {% endblock %}

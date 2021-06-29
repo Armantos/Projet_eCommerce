@@ -21,9 +21,9 @@
     <br/>
     <div class="container">
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8"><h1 style = "background-color: lightskyblue ; width: 980px" >Toutes vos envies de marques au meilleur prix</h1></div>
-            <div class="col-sm-2"></div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10"><h1 style = "background-color: lightskyblue ; width: 980px" >Toutes vos envies de marques au meilleur prix</h1></div>
+            <div class="col-sm-1"></div>
         </div>
     </div>
 
@@ -38,11 +38,11 @@
     </ul>
 </div>
     -->
-
+    <div class="row">
+    </div>
     <div class="row">
         {% for article in articles %}
-
-            <div id="articles" class="card col-md-4" style="width: 20rem ">
+            <div id="articles" class="card col-md-7" style="width: 20rem ">
                 <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
                     à {{ article.createdAt | date("H:i") }}
                 <span class="seller">{{ article.seller }}</span></p>
