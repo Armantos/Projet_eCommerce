@@ -31,9 +31,6 @@
             <tr>
 
                 {% endfor %}
-            
-            
-
 
             </tbody>
 
@@ -49,7 +46,6 @@
                 {% if is_granted("ROLE_USER") %}
                    {#  <td><a href="{{ path('order',app.user.id, items ) }}">Valider la commande</a></td>#}
                 <td><button id="checkout-button">Payer</button</td>
-
                 <script type="text/javascript">
 	            // Create an instance of the Stripe object with your publishable API key
             var stripe = Stripe('pk_test_51J4SPfIocXlW1GMrkthGO5TkYHOrixLggZaLPAfbXcjAwawPhWQdR50K1FkLrEETAIZLaSb6fc6hU2jN3adNTVBM009ovClb4L');
@@ -86,8 +82,12 @@
 
         </table>
 
+
     {% else %}
         <p> Votre panier est vide </p>
     {% endif %}
-        {% endblock %}
+
+    <a style = "background-color: black; color: lightskyblue ; width:330px"  href={{ path('billing') }} class=" btn btn-primary">Modifier les infos de livraison</a>
+
+{% endblock %}
     

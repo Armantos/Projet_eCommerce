@@ -36,4 +36,15 @@ class OrderController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+    #[Route('/billing', name: 'billing')]
+    //  #[Route('/order/{id}/{items}', name: 'order')]
+
+    public function createBilling(): Response
+        // public function createOrder(int $id,Article $items): Response
+
+    {
+
+        return $this->render("/order/billing.html.twig");
+    }
 }
+
