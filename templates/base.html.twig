@@ -6,9 +6,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/style_1.css">
-
 
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -18,22 +15,18 @@
     {% block stylesheets %}
         {# {{ encore_entry_link_tags('app') }} #}
     {% endblock %}
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
 
+    <script src="https://js.stripe.com/v3/"></script>
 
-    {% block javascripts %}
-        {# {{ encore_entry_script_tags('app') }} #}
-    {% endblock %}
 </head>
 
 
 <body>
-
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <FONT size="6pt">
-                <a style = "color: lightskyblue" class="navbar-brand" href="/">ANOmark's  &nbsp; </a>
-            </FONT>
+            <a class="navbar-brand" href="/">Projet DevWeb</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,7 +46,7 @@
                             <a class="nav-link" href="login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('register') }}">Créer un compte &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</a>
+                            <a class="nav-link" href="{{ path('register') }}">Créer un compte</a>
                         </li>
                     {% endif %}
 
@@ -67,39 +60,37 @@
                             <a href="{{ path('profile') }}" class="nav-link">Paramètres</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+                            <a href="{{ path('app_logout') }}" class="nav-link">Déconnexion</a>
                         </li>
 
-
                         {% if is_granted("ROLE_ADMIN") %}
-                            <li class="nav-item">
-                                <a href="{{ path('admin') }}" class="nav-link">Administration</a>
-                            </li>
+                        <!--Si l'utilisateur a le role admin, afficher le bouton suivant-->
+                        <li class="nav-item">
+                            <a href="{{ path('admin') }}" class="nav-link">Administration</a>
+                        </li>
                         {% endif %}
                     </ul>
                 </ul>
                 {% endif %}
-
-                <!--Barre de recherche à implementer ?-->
-                <form class="d-flex" data-children-count="1">
-                    <!--<input class="form-control me-sm-2" type="text" placeholder="Search">
-                    <button style = "background-color: lightskyblue"; class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
-                </form>
             </div>
         </div>
     </nav>
 </header>
 
 <div class="container">
-
     {% block body %}{% endblock %}
+    {% block javascripts %}
+        {# {{ encore_entry_script_tags('app') }} #}
+    {% endblock %}
 </div>
+
+</body>
 
 <footer id="footer">
     <!-- Copyright -->
 
-    <div class=" text-center p-2
-        " style="background-color: rgba(0, 0, 0, 0.05);">
+    <div class=" text-center p-4
+    " style="background-color: rgba(0, 0, 0, 0.05);">
         © 2021 Copyright:
         <p class="text-reset fw-bold"> Armand HURAULT, Ouriel MAMAN, Nabil EL BARKAOUI</p>
     </div>
@@ -107,9 +98,5 @@
     <!-- Copyright -->
 </footer>
 <!-- Footer -->
-
-</body>
-
-
 
 </html>

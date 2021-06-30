@@ -4,30 +4,18 @@
 
 {% block body %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {#  <p>Email: {{ app.user.email }}</p>#}
-        <br/>
+       {#  <p>Email: {{ app.user.email }}</p>#}
         <div class="container">
             <h1 class="title p-1">Informations de votre compte</h1>
 
             <div class="content">
                 <p class="username"> Votre nom d'utilisateur : {{ app.user.username }}</p>
-                <p class="firstName"> Votre prénom {{ app.user.firstName }}</p>
+                <p class="firstName"> Votre prénom : {{ app.user.firstName }}</p>
                 <p class="lastName"> Votre nom : {{ app.user.lastName }} </p>
                 <p class="email"> Votre email : {{ app.user.email }}</p>
-                <p class="orders"> Vos commandes en cours: //TODO</p>
-                <p class="deleteAccount"> Supprimer votre compte //TODO</p>
-                <br/>
-                <a style = "background-color: black; color: lightskyblue ; width:700px"  href="{{ path('editUser', {'id':app.user.id}) }}" class="btn btn-primary">Modifier Compte (change uniquement le pseudo pour l'instant)</a>
-                <br/>
-                <br/>
-                <a style = "background-color: black; color: lightskyblue ; width:330px" href="{{ path('deleteUser', {'id':app.user.id}) }}" class="btn btn-primary">Supprimer Compte </a>
-                <br/>
-                <br/>
-                <a style = "background-color: black; color: lightskyblue ; width:330px" href="{{ path('showOrders', {'id':app.user.id}) }}" class="btn btn-primary">Voir les commandes en cours</a>
-                <br/>
-                <br/>
-                <a style = "background-color: black; color: lightskyblue ; width:330px"  href={{ path('stats') }} class=" btn btn-primary">Voir les statistiques</a>
-                <br/>
+                <a href="{{ path('editUser', {'id':app.user.id}) }}" class="btn btn-primary">Modifier infos (non terminé)</a>
+                <a href="{{ path('deleteUser', {'id':app.user.id}) }}" class="btn btn-primary">Supprimer Compte</a>
+                <a href="{{ path('showOrders', {'id':app.user.id}) }}" class="btn btn-primary">Voir les commandes en cours</a>
             </div>
         </div>
     {% endif %}
