@@ -23,7 +23,7 @@ class OrderController extends AbstractController
     #[Route('/order/{id}', name: 'order')]
         public function createOrder(SessionInterface $session, ArticleRepository $articleRepository, UserRepository $userRepository, $id): Response
     {
-        //////////////////////creation de la commande///////////////////////
+        //creation de la commande
         $order = new Order();
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -33,11 +33,8 @@ class OrderController extends AbstractController
         $user = $repoUser->find($id);
         $order->setUser($user);
 
-        //Creation de la commande (vide à la création)
         $entityManager->persist($order);
-        //////////////////////creation de la commande///////////////////////
 
-        //////////////////////Ajout des orderItem///////////////////////
         //Recuperation du panier dans la session
         $cart = $session->get('cart', []);
 
@@ -52,7 +49,6 @@ class OrderController extends AbstractController
             //Ajout de l'orderItem dans la commande
             $order->addOrderItem($orderItem);
         }
-        //////////////////////Ajout des orderItem///////////////////////
 
         $entityManager->persist($order);
         $entityManager->flush();

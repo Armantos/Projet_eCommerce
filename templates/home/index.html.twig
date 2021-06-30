@@ -20,10 +20,7 @@
                     <h7 class="card-price">Prix : {{ article.price }}</h7>
                     <h8 class="card-sold">Achetés : {{ article.nbSold }}</h8>
 
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-
                     <!--path = name ==>show , argument id = objet {'id':article.id}-->
-                    
                     <a href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter</a>
                     <a href="{{ path('show', {'id':article.id}) }}" class="btn btn-primary">En savoir plus</a>
 

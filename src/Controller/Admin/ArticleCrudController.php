@@ -18,7 +18,7 @@ class ArticleCrudController extends AbstractCrudController
         return Article::class;
     }
 
-
+    //Formulaire d'edition/creation d'un article dans la partie admin
     public function configureFields(string $pageName): iterable
     {
         return [

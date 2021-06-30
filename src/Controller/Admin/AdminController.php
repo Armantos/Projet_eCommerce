@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 
 class AdminController extends EasyAdminController
 {
+    //Insere le mdp encode dans la BDD
     protected function persistUserEntity($user)
     {
         $encodedPassword = $this->encodePassword($user, $user->getPlainPassword());
@@ -17,6 +18,7 @@ class AdminController extends EasyAdminController
         parent::persistEntity($user);
     }
 
+    //Met a jour l'entite User
     protected function updateUserEntity($user)
     {
         $encodedPassword = $this->encodePassword($user, $user->getPlainPassword());
@@ -25,6 +27,7 @@ class AdminController extends EasyAdminController
         parent::updateEntity($user);
     }
 
+    //Encode le mdp de l'utilisateur
     private function encodePassword($user, $password)
     {
         $passwordEncoderFactory = new EncoderFactory([
