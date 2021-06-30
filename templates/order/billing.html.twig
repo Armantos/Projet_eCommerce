@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livraison{% endblock %}
+
+{% block body %}
+    <br/>
+    <br/>
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+    <h4 style="background-color: lightskyblue ; width: 400px">Infos de livraisons</h4>
+
+    <br/>
+    <form action="">
+
+        <div style="width: 400px" class="form-group">
+            <input placeholder="Prénom" required name="_firstname"
+                   type="text" class="form-control">
+        </div>
+        <br/>
+        <div style="width: 400px" class="form-group">
+            <input placeholder="Nom" required name="_name"
+                   type="text" class="form-control">
+        </div>
+        <br/>
+        <div style="width: 400px" class="form-group">
+            <input placeholder="email" required name="_username"
+                   type="text" class="form-control">
+        </div>
+        <br/>
+        <div style="width: 400px" class="form-group">
+            <input placeholder="Adresse" required name="_username"
+                   type="text" class="form-control">
+        </div>
+        <br/>
+        <div style="width: 400px" class="form-group">
+            <input placeholder="Code postal" required name="_firstname"
+                   type="text" class="form-control">
+        </div>
+        <br/>
+        <div style="width: 400px" class="form-group">
+            <input placeholder="Ville" required name="_name"
+                   type="text" class="form-control">
+        </div>
+        <br/>
+        <div style="width: 400px" class="form-group">
+            <input placeholder="Pays" required name="_username"
+                   type="text" class="form-control">
+        </div>
+
+
+        {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+        #}
+
+        <div class="form-check">
+            <br/>
+            <h6 style="background-color: lightskyblue ; width: 185px">Mode de livraison :</h6>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+                Colissimo : Livraison gratuite
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label" for="exampleRadios2">
+                UPS : 5€
+            </label>
+        </div>
+        <div class="form-group">
+            <br/>
+
+
+        <a style = "background-color: black ; color: lightskyblue ; width:150px"  href={{ path('cart') }} class=" btn btn-primary">Valider</a>
+
+
+    </div>
+    </form>
+    <br/>
+    <br/>
+    </div>
+</div>
+    </div>
+    <div class="col-sm-3">
+    </div>
+
+{% endblock %}

@@ -57,4 +57,30 @@ class OrderController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+    #[Route('/billing', name: 'billing')]
+    //  #[Route('/order/{id}/{items}', name: 'order')]
+
+    public function createBilling(): Response
+        // public function createOrder(int $id,Article $items): Response
+
+    {
+
+        return $this->render("/order/billing.html.twig");
+    }
+
+
+    #[Route('/stats', name: 'stats')]
+    public function Stats(): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+
+        $articles = $repo->findAll();
+
+        //dd($articles); //debug pour afficher le tableau d'articles
+
+        return $this->render("/order/stats.html.twig",
+            ['articles' => $articles,
+            ]);
+    }
 }
+
