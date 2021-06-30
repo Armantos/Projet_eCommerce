@@ -11,7 +11,6 @@
             width: 95%;
             font: 18px/1.5 sans-serif;
         }
-
         .example-wrapper code {
             background: #F5F5F5;
             padding: 2px 6px;
@@ -45,7 +44,7 @@
             <div id="articles" class="card col-md-7" style="width: 20rem ">
                 <p class="date"> Ajouté le {{ article.createdAt | date("d/m/y") }}
                     à {{ article.createdAt | date("H:i") }}
-                <span class="seller">{{ article.seller }}</span></p>
+                    <span class="seller">{{ article.seller }}</span></p>
                 <img class="card-img-top" src="/assets/eCommerce/images/{{ article.image }}" alt="{{ article.title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ article.title }}</h5>
@@ -56,7 +55,7 @@
                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
 
                     <!--path = name ==>show , argument id = objet {'id':article.id}-->
-                    
+
                     <a style = "background-color: lightskyblue ; width:230px"  href="{{ path('addCart', {'id':article.id}) }}" class=" btn btn-primary">Ajouter au panier</a>
                     <a style = "background-color: black ; color: lightskyblue ; width:230px" href="{{ path('show', {'id':article.id}) }}" class="btn btn-primary">En savoir plus</a>
 

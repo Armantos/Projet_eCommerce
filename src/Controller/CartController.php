@@ -16,13 +16,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Stripe\Stripe;
 
-
 class CartController extends AbstractController
 {
     #[Route('/cart', name: 'cart')]
-    public function index(SessionInterface $session, ArticleRepository $articleRepository) : Response
+    public function index(SessionInterface $session, ArticleRepository $articleRepository): Response
     {
-        
+
         $cart = $session->get('cart', []);
 
         $cartWithData = [];
@@ -48,7 +47,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/add/{id}', name: 'addCart')]
-    public function addCart($id, SessionInterface $session) : Response
+    public function addCart($id, SessionInterface $session): Response
     {
         $cart = $session->get('cart', []);
         if (!empty($cart[$id])) {
@@ -63,7 +62,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/remove/{id}', name: 'removeCart')]
-    public function removeCart($id, SessionInterface $session) : Response
+    public function removeCart($id, SessionInterface $session): Response
     {
         $cart = $session->get('cart', []);
 
@@ -74,47 +73,4 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute(("cart"));
     }
-
-    /**
-     * @Route("/create-checkout-session", name="checkout")
-     */
-    public function checkout(SessionInterface $session, ArticleRepository $articleRepository): Response
-    {
-        
-        \Stripe\Stripe::setApiKey('sk_test_51J4SPfIocXlW1GMrf5DAoN0i67BaiqnUpEzzBlb5t93a01xUdfqHRU9FGS74Gq1baPp7d5rrywNVtjl3lK9ojJQ500IKG8dBuJ');
-       
-        $session = \Stripe\Checkout\Session::create([
-            
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'eur',
-                    'product_data' => [
-                        'name' => 'DIDIER ACHVAR', // TODO
-                    ],
-                    'unit_amount' => '40000' ///  TODO  
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => $this->generateUrl('success', [], UrlGeneratorInterface::ABSOLUTE_URL), // TODO : Recup données ORDER après le paiemennt 
-            'cancel_url' => $this->generateUrl('error', [], UrlGeneratorInterface::ABSOLUTE_URL),
-        ]);
-        return new JsonResponse(['id' => $session->id]);
-    }
-    
-
-    #[Route('/error', name: 'error')]
-    public function error()
-    {
-        return $this->render("/cart/error.html.twig");
-    }
-
-
-    #[Route('/success', name: 'success')]
-    public function success()
-    {
-        return $this->render("/cart/success.html.twig");
-    }
-
 }

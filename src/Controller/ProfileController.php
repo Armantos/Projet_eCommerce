@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Order;
+use App\Entity\OrderItem;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,30 +22,28 @@ class ProfileController extends AbstractController
         return $this->render("/profile/profile.html.twig");
     }
 
-    //TODO edit user
+    //TODO Edition des informations de l'utilisateur
     #[Route('/profile/edit/{id}', name: 'editUser')]
     public function updateProfile(int $id, UserPasswordHasherInterface $passwordHasher): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($id);
 
+        //Affiche une erreur si l'utilisateur n'est pas trouve
         if (!$user) {
             throw $this->createNotFoundException(
                 'No user found for id '.$id
             );
         }
 
-        //TODO verifier si les champs ne sont pas vides
-        //TODO verifier si le username n'existe pas deja
-        $user->setUsername('New user name!');
-        $user->setFirstName('New first name!');
-        $user->setLastName('New last name!');
-
+        //TODO ajouter le formulaire de modification des infos et recuper les informations dessus
+        $user->setUsername('nouveau pseudo test');
+        $user->setFirstName('nouveau prenom test');
+        $user->setLastName('nouveau nom test');
         $user->setPassword(
             $passwordHasher->hashPassword(
                 $user,
                 'test12'
-                //$form->get('plainPassword')->getData()
             )
         );
         $entityManager->flush();
@@ -52,6 +51,7 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('profile');
     }
 
+    //Supprime le compte de l'utilisateur
     #[Route('/profile/delete/{id}', name: 'deleteUser')]
     public function deleteProfile(int $id): Response
     {
@@ -74,17 +74,23 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    //Affiche les commandes passees par l'utilisateur
     #[Route('/profile/showOrders/{id}', name: 'showOrders')]
     public function showOrders(int $id): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Order::class);
+        $repoOrder = $this->getDoctrine()->getRepository(Order::class);
+        $orders = $repoOrder->findAll();
 
-        $orders = $repo->findAll();
+        $repoOrderItem = $this->getDoctrine()->getRepository(OrderItem::class);
+        $orderItems = $repoOrderItem->findAll();
 
-        //dd($articles); //debug pour afficher le tableau d'articles
+        $repoArticle = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repoArticle->findAll();
 
         return $this->render("/profile/orders.html.twig",
             ['orders' => $orders,
+             'orderItems' => $orderItems,
+             'articles' => $articles,
             ]);
     }
 }

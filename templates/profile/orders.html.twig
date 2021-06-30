@@ -4,37 +4,45 @@
 
 {% block body %}
     {% if orders | length > 0 %}
-    <p>Liste de vos commandes en cours</p>
+        <p>Liste de vos commandes en cours</p>
 
         <table class="table">
             <thead>
             <tr>
+                <th>N° Commande</th>
                 <th>Produit</th>
                 <th>Prix</th>
                 <th>Quantité</th>
                 <th>Total</th>
-                <th>Action</th>
             <tr>
             </thead>
 
             <tbody>
             {% for order in orders %}
+            {% set totalPrice = 0 %}
             <tr>
-                <td>{{ order.article.title }}</td>
-                <td>{{ order.article.price }} €</td>
-                <td>{{ order.quantity }}</td>
-                <td>{{ order.article.price * order.quantity }}</td>
+                {#  {{ dump(order) }} pour faire un vardump en twig#}
+                {% for orderItem in orderItems %}
+                <td>{{  order.id }}</td>
+                <td>{{ orderItem.article.title }}</td>
+                <td>{{ orderItem.article.price }}</td>
+                <td>{{ orderItem.quantity }}</td>
+                <td>{{ orderItem.article.price * orderItem.quantity }} €</td>
+                {% set totalPrice = totalPrice + orderItem.article.price * orderItem.quantity %}
             <tr>
-
                 {% endfor %}
             </tbody>
-
             <tfoot>
             <tr>
-                <td colspan="3">Total de la commande :</td>
-                <td>{{ total }} €</td>
+                <td colspan="3">Total de la commande N°{{ order.id }} : {{ totalPrice }}€</td>
             </tr>
             </tfoot>
+            {% endfor %}
+
+
+
+
+
         </table>
 
     {% else %}
