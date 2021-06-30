@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+//Formulaire d'inscription
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -39,15 +40,15 @@ class RegistrationFormType extends AbstractType
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
-                'mapped' => false, //lie à l'entite ?
+                'second_options' => ['label' => 'Repeat Password'], //Demande la repetition du mdp
+                'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
+                'constraints' => [ //Empeche le mdp d'etre vide
                     new NotBlank([
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 6, //Le mdp doit faire minimum 6 caractères
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,

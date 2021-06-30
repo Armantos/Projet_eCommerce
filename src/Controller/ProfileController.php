@@ -22,28 +22,28 @@ class ProfileController extends AbstractController
         return $this->render("/profile/profile.html.twig");
     }
 
-    //TODO edit user
+    //TODO Edition des informations de l'utilisateur
     #[Route('/profile/edit/{id}', name: 'editUser')]
     public function updateProfile(int $id, UserPasswordHasherInterface $passwordHasher): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($id);
 
+        //Affiche une erreur si l'utilisateur n'est pas trouve
         if (!$user) {
             throw $this->createNotFoundException(
                 'No user found for id '.$id
             );
         }
 
-        //TODO ajouter le formulaire de modification des infos
-        $user->setUsername('new username');
-        $user->setFirstName('new firstname');
-        $user->setLastName('new lastname');
+        //TODO ajouter le formulaire de modification des infos et recuper les informations dessus
+        $user->setUsername('nouveau pseudo test');
+        $user->setFirstName('nouveau prenom test');
+        $user->setLastName('nouveau nom test');
         $user->setPassword(
             $passwordHasher->hashPassword(
                 $user,
                 'test12'
-                //$form->get('plainPassword')->getData()
             )
         );
         $entityManager->flush();

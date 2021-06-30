@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
 {
-
+    //Route et fonction pour tester des liens
     #[Route('/hello', name: 'hello')]
     public function hello(): Response
     {

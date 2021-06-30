@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-
+    //Affiche la liste de tous les articles
     #[Route('/', name: 'home')]
     public function index(): Response
     {
@@ -19,13 +19,14 @@ class HomeController extends AbstractController
 
         $articles = $repo->findAll();
 
-        //dd($articles); //debug pour afficher le tableau d'articles
+        //dd($articles); //debug pour afficher le tableau d'articles sous formes de lignes
 
         return $this->render("/home/index.html.twig",
             ['articles' => $articles,
             ]);
     }
 
+    //Affiche la page d'un article avec sa description
     #[Route('/show/{id}', name: 'show')]
     public function show($id): Response
     {

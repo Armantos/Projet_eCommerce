@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Article;
 
 use App\Repository\ArticleRepository;
-use Cart;
 use SessionIdInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,13 +18,13 @@ use Stripe\Stripe;
 
 class CheckoutController extends AbstractController
 {
-    /**
-     * @Route("/create-checkout-session", name="checkout")
-     */
+
+    //Lien vers la page de paiement de l'API Stripe
+    #[Route('/create-checkout-session', name: 'checkout')]
     public function checkout(SessionInterface $session, ArticleRepository $articleRepository): Response
     {
-      
-         \Stripe\Stripe::setApiKey('sk_test_51J4SPfIocXlW1GMrf5DAoN0i67BaiqnUpEzzBlb5t93a01xUdfqHRU9FGS74Gq1baPp7d5rrywNVtjl3lK9ojJQ500IKG8dBuJ');
+        //Cle privee Stripe de Nabil
+        \Stripe\Stripe::setApiKey('sk_test_51J4SPfIocXlW1GMrf5DAoN0i67BaiqnUpEzzBlb5t93a01xUdfqHRU9FGS74Gq1baPp7d5rrywNVtjl3lK9ojJQ500IKG8dBuJ');
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -35,7 +34,7 @@ class CheckoutController extends AbstractController
                     'product_data' => [
                         'name' => 'Total à régler',
                     ],
-                    'unit_amount' => 10000 ,
+                    'unit_amount' => 10000,
                 ],
                 'quantity' => 1,
             ]],
@@ -46,13 +45,14 @@ class CheckoutController extends AbstractController
         return new JsonResponse(['id' => $session->id]);
     }
 
+    //Route renvoyee en cas d'erreur
     #[Route('/error', name: 'error')]
     public function error()
     {
         return $this->render("/cart/error.html.twig");
     }
 
-
+    //Route renvoyee en cas de succes
     #[Route('/success', name: 'success')]
     public function success()
     {

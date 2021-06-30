@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 use Faker;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-
+//Creer des fausses donnees pour la bdd
 class AppFixtures extends Fixture
 {
 
