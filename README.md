@@ -1,3 +1,8 @@
+Documentation complete du projet :  
+-Sujet : Projet_3-SiteBoutiqueElectronique.pdf  
+-Diagramme UML du site  
+-Rapport site web.pdf
+
 Thème bootstrap venant de https://bootswatch.com/
 
 Première installation (nécessite PHP, symfony et composer d'installés) :  
