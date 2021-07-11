@@ -21,4 +21,7 @@ Mise à jour de la base de données après modification du code :
 > symfony console doctrine:migrations:migrate
 
 Importation base de données :  
-phpmyadmin > Importation > ecommerce.sql
+phpmyadmin > Importation > ecommerce.sql  
+
+Des images ainsi que le rapport du projet sont disponibles sur GitHub
+
